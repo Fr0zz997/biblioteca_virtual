@@ -17,15 +17,7 @@ $txtNombre = (isset($_POST['txtNombre'])) ? $_POST['txtNombre'] : "";
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : ""; 
 $txtImagen = (isset($_FILES['txtImagen']['name'])) ? $_FILES['txtImagen']['name'] : "";
 
-
-// Conexión a la base de datos
-$host="localhost";
-$bd="sitio";
-$usuario="root";
-$contraseña="";
-
-
-
+// Incluir la conexión a la base de datos
 include("../config/bd.php"); 
 
 // Manejo de acciones del formulario

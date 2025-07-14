@@ -1,59 +1,35 @@
 <?php include("template/cabecera.php"); ?>
 
+<?php include("administrador/config/bd.php"); ?>
 
-<div class="col-md-3">
-    <div class="card">
+<!-- Selecciona todos los libros de la base de datos -->
+<?php
+$sentenciaSQL = $conexion->prepare("SELECT * FROM Libros");
+$sentenciaSQL->execute();
+$listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);  
+?>
 
-    <img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/009/871/916/non_2x/three-books-and-one-open-cartoon-illustration-vector.jpg" alt="">
+<!-- Mostrar los libros en una cuadrícula -->
 
-    <div class="card-body">
-        <h4 class="card-title">Libro</h4>
-        <a name="" id="" class="btn btn-primary" href="#" role="button">Ver más </a>
-    </div>
+<?php if(count($listaLibros) == 0) { ?>
+<div class="alert alert-danger" role="alert">
+    No hay libros disponibles. <?php }?>
 
-    </div>
-</div>
-
-<div class="col-md-3">
-    <div class="card">
-
-    <img class="card-img-top" src="https://i.pinimg.com/736x/ea/1d/28/ea1d28663072613b9da4d17d3e4c925a.jpg" alt="">
-
-    <div class="card-body">
-        <h4 class="card-title">Libro</h4>
-        <a name="" id="" class="btn btn-primary" href="#" role="button">Ver más </a>
-    </div>
-    </div>
-</div>
-
-<div class="col-md-3">
-    <div class="card">
-
-    <img class="card-img-top" src="https://static.vecteezy.com/system/resources/previews/009/871/916/non_2x/three-books-and-one-open-cartoon-illustration-vector.jpg" alt="">
-
-    <div class="card-body">
-        <h4 class="card-title">Libro</h4>
-        <a name="" id="" class="btn btn-primary" href="#" role="button">Ver más </a>
-    </div>
-
+<div class="container">
+    <div class="row">
+        <?php foreach($listaLibros as $libro) { ?>
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="img/<?php echo $libro["imagen"]; ?>" height="300" alt="imagen de libro">
+                <div class="card-body">
+                    <h4 class="card-title"><?php echo $libro["nombre"]; ?></h4> 
+                    <a name="" id="" class="btn btn-primary" href="pdf/<?php echo htmlspecialchars($libro["pdf"]); ?>" target="_blank" role="button"> Ver más </a>
+                </div>
+            </div>
+        </div>
+        <?php } ?>
     </div>
 </div>
-
-
-<div class="col-md-3">
-    <div class="card">
-
-    <img class="card-img-top" src="https://i.pinimg.com/736x/ea/1d/28/ea1d28663072613b9da4d17d3e4c925a.jpg" alt="">
-
-    <div class="card-body">
-        <h4 class="card-title">Libro</h4>
-        <a name="" id="" class="btn btn-primary" href="#" role="button">Ver más </a>
-    </div>
-    </div>
-</div>
-
-
-
 
 
 
